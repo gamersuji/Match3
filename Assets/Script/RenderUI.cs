@@ -13,14 +13,15 @@ public class RenderUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void RenderObject(int index,GameObject choosenObject)
+    public void RenderObject(int index,Pickable choosenObject)
     {
 
         //var worldCoords = stackUI[index].TransformPoint(stackUI[index].rect.center);
         //choosenObject.transform.localPosition = Camera.main.ScreenToWorldPoint(worldCoords); ;
 
-        choosenObject.layer = LayerMask.NameToLayer("UIObject");
+        choosenObject.gameObject.layer = LayerMask.NameToLayer("UIObject");
         Debug.Log("Stack UI " + stackUI[index].transform.position);
+        choosenObject.DisableRigidBody();
 
         choosenObject.transform.position = stackUI[index].transform.position;
     }
@@ -34,3 +35,4 @@ public class RenderUI : MonoBehaviour
          stackUI[index].gameObject.SetActive(false);
     }
 }
+    

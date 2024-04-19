@@ -139,7 +139,7 @@ public class SortSystem : MonoBehaviour
         {
 
             sortedArray[i] = sortedArray[i-1]; //you have to start moving from the last element to the next element of the last element
-            renderUI.RenderObject(i, sortedArray[i].gameObject);
+            renderUI.RenderObject(i, sortedArray[i]);
 
         }
     }
@@ -161,7 +161,7 @@ public class SortSystem : MonoBehaviour
             sortedArray[i -3] = sortedArray[i];
             Debug.Log(sortedArray[i].gameObject.name+" MoveItemsAfterMatch - the object to move" + sortedArray[i - 3].gameObject.name);
 
-            renderUI.RenderObject(i -3, sortedArray[i -3].gameObject);
+            renderUI.RenderObject(i -3, sortedArray[i -3]);
             sortedArray[i] = null;
 
         }
@@ -170,8 +170,8 @@ public class SortSystem : MonoBehaviour
     private void AddNewItem(int indexToPut,Pickable picked)
     {
         sortedArray[indexToPut] = picked;
-        renderUI.RenderObject(indexToPut, picked.gameObject);
-    }
+        renderUI.RenderObject(indexToPut, picked);
+    }   
 
     
 }
