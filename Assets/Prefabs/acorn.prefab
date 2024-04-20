@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5803937233652953689}
   - component: {fileID: 5136970586566635092}
   - component: {fileID: 5136970586566635095}
-  - component: {fileID: 8892461403128886097}
+  - component: {fileID: -6044057272376529856}
   m_Layer: 0
   m_Name: acorn
   m_TagString: Untagged
@@ -94,7 +94,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5443521926433837964}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -115,8 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
---- !u!65 &8892461403128886097
-BoxCollider:
+--- !u!64 &-6044057272376529856
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -125,6 +125,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.66570246, y: 0.98135, z: 0.6657024}
-  m_Center: {x: -0.000000014901161, y: 0.000000029802322, z: -9.094947e-13}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5623691753684549296, guid: c380b08fbb6554d6abe1fe32a31f596e, type: 3}

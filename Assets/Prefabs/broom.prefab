@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 870568040993668646}
   - component: {fileID: 2005637459346659767}
   - component: {fileID: 2005637459346659766}
-  - component: {fileID: 4568579525164122992}
+  - component: {fileID: 7342801299565096245}
   m_Layer: 0
   m_Name: broom
   m_TagString: Untagged
@@ -94,7 +94,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662986552408776691}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -115,8 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 16
---- !u!65 &4568579525164122992
-BoxCollider:
+--- !u!64 &7342801299565096245
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -125,6 +125,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.44738218, y: 1.6559277, z: 0.29629767}
-  m_Center: {x: 0, y: -0.000000059604645, z: 0}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7236992155535615063, guid: 04607f994b6434a4fa283a26d6d6f916, type: 3}

@@ -7,19 +7,21 @@ public class PickItem : MonoBehaviour
 
     [SerializeField]private SortSystem sortSystem;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static Vector3 mousePointOnScreen;
 
+
+
+
+
+ 
     // Update is called once per frame
     void Update()
     {
         // Cast a ray from the mouse position into the scene
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -33,9 +35,10 @@ public class PickItem : MonoBehaviour
                 if (hitObject.GetComponent<Pickable>() != null)
                 {
                     sortSystem.PickedItem(hitObject.GetComponent<Pickable>());
-                    UnityEngine.Debug.Log("Hit object: " + hitObject.name);
                 }
             }
         }
+
+     
     }
 }

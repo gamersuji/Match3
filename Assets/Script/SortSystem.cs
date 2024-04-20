@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,23 +10,15 @@ public class SortSystem : MonoBehaviour
     private int freeIndex;
 
     [SerializeField]private RenderUI renderUI;
+
+    private int totalItems = 20;
+    private int matchedPair = 0;
+
+    [SerializeField] private GameManager gameManager;
  
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     public void PickedItem(Pickable picked)
     {
-        
 
        if(freeIndex< sortedArray.Length)
         {
@@ -46,39 +39,36 @@ public class SortSystem : MonoBehaviour
                         index = i;
                     }
                 }
-               
 
                 if(sortedArray.Length -1 == i)
                 {
-                    //bool empty = false;
-                    //for (int j = 0; j < sortedArray.Length; j++)
-                    //{
-                    //    if (sortedArray[j] != null)
-                    //    {
-                    //        index = j;
-                    //        empty = true;
-                    //    }
-                    //}
-                    //if(empty)
-                    //{
-                    //    index = 0;
-                    //}
-
+    
                     if(count > 0) //match available
                     {
-                        AddMatchingItem(count, index, totalUsedIndex,picked);
+
+                        if (totalUsedIndex == sortedArray.Length - 1 && count != 2)
+                        {
+                            gameManager.GameOver();
+                        }
+                        else
+                        {
+                            AddMatchingItem(count, index, totalUsedIndex, picked);
+
+                        }
                     }
                     else //no match
                     {
-                        AddNewItem(totalUsedIndex,picked);
+                        if (totalUsedIndex == sortedArray.Length - 1 && count != 2)
+                        {
+                            gameManager.GameOver();
+                        }
+                        else
+                            AddNewItem(totalUsedIndex,picked);
+                      
                     }
 
                 }
             }
-
-
-            ///check for gameover
-            ///
         }
     }
 
@@ -87,6 +77,8 @@ public class SortSystem : MonoBehaviour
         if (count == 2) //a match  
         {
             //match
+
+            ++matchedPair;
 
             //sort the rest animation
             if (totalUsedIndex < sortedArray.Length)
@@ -97,16 +89,21 @@ public class SortSystem : MonoBehaviour
             }
             sortedArray[lastItemIndex + 1] = sortedArray[lastItemIndex];
 
-            AddNewItem(lastItemIndex + 1, picked);
+            AddNewItem(lastItemIndex + 1, picked,()=>
+            {
+                DisableMatchedItems(lastItemIndex + 1, () =>
+                {
+                    MoveItemsAfterMatch(lastItemIndex + 2, totalUsedIndex);
+                });
 
-            DisableMatchedItems(lastItemIndex+1);
-            //vanish
+            }
+            );
 
-            MoveItemsAfterMatch(lastItemIndex + 2,totalUsedIndex);
+            if(matchedPair == totalItems)
+            {
+                gameManager.GameWin();
+            }
 
-
-            
-            //move elements if filled
         }
         else if (count == 1) //less than a match
         {
@@ -132,46 +129,46 @@ public class SortSystem : MonoBehaviour
 
     private void SortTheRest(int indexToSortFrom,int lastIndex)
     {
-        Debug.Log("Index to sort from: "+indexToSortFrom+" / last index: "+lastIndex);
-
-
         for (int i = lastIndex; i > indexToSortFrom; i--)
         {
-
             sortedArray[i] = sortedArray[i-1]; //you have to start moving from the last element to the next element of the last element
-            renderUI.RenderObject(i, sortedArray[i]);
+            renderUI.MoveObjectRight(i, sortedArray[i]);
 
         }
     }
-    private void DisableMatchedItems(int lastItemIndex)
+    private void DisableMatchedItems(int lastItemIndex,Action callback)
     {
-        for (int i = lastItemIndex; i >= lastItemIndex-2; i--)
+     
+
+        Pickable[] sortedArray2 =  { sortedArray[lastItemIndex-2], sortedArray[lastItemIndex-1] , sortedArray[lastItemIndex]};
+        for (int i = lastItemIndex; i >= lastItemIndex - 2; i--)
         {
-            sortedArray[i].gameObject.SetActive(false);
             sortedArray[i] = null;
-            //renderUI.RemoveObject(i);
 
         }
+
+        renderUI.MatchObjects(sortedArray2, lastItemIndex, () => { callback(); }); 
     }
     private void MoveItemsAfterMatch(int indexToSortFrom, int lastIndex)
     {
         for (int i = indexToSortFrom; i <= lastIndex; i++)
         {
-            Debug.Log("MoveItemsAfterMatch - i " + (i - 3)+" i - "+i);
             sortedArray[i -3] = sortedArray[i];
-            Debug.Log(sortedArray[i].gameObject.name+" MoveItemsAfterMatch - the object to move" + sortedArray[i - 3].gameObject.name);
-
-            renderUI.RenderObject(i -3, sortedArray[i -3]);
+            renderUI.MoveObjectLeft(i -3, sortedArray[i -3]);
             sortedArray[i] = null;
 
         }
     }
 
-    private void AddNewItem(int indexToPut,Pickable picked)
+    private void AddNewItem(int indexToPut,Pickable picked,Action callback = null)
     {
         sortedArray[indexToPut] = picked;
-        renderUI.RenderObject(indexToPut, picked);
-    }   
+        //renderUI.RenderObject(indexToPut, picked);
+        renderUI.GoToPoint(indexToPut, picked,callback);
 
-    
+
+
+    }
+
+
 }

@@ -31,6 +31,9 @@ public class Pickable : MonoBehaviour
 
     private Rigidbody rb;
 
+    [SerializeField] private Vector3 xPos;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,4 +45,10 @@ public class Pickable : MonoBehaviour
     {
         rb.isKinematic = true;
     }
+
+    public void RotateToSet()
+    {
+        transform.rotation = Quaternion.Euler(xPos);
+    }
+
 }

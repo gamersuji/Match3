@@ -26,12 +26,11 @@ public class PrefabSpawner : MonoBehaviour
             for (int i = 0; i < pickableResource.Length; i++)
             {
 
-                float x = Random.Range(-1.35f, 1.35f);
-                float y = Random.Range(2, -1);
+                float x = Random.Range(-1.35f, 0.5f);
+                float y = Random.Range(2, 0);
 
                 GameObject instance = Instantiate(pickableResource[i].gameObject, transform);
-                //instance.transform.position = camera.ScreenToWorldPoint(new Vector3(x,1,y));
-                instance.transform.localPosition = new Vector3(x, 2, y);
+                instance.transform.localPosition = new Vector3(x, 2f, y);
 
             }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5751326508207799040}
   - component: {fileID: 6345929617279933861}
   - component: {fileID: 6345929617279933858}
-  - component: {fileID: -717138785489844177}
+  - component: {fileID: -8449153101834841564}
   m_Layer: 0
   m_Name: cake
   m_TagString: Untagged
@@ -94,7 +94,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6111433678236998357}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -115,8 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 18
---- !u!65 &-717138785489844177
-BoxCollider:
+--- !u!64 &-8449153101834841564
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -125,6 +125,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.797263, y: 0.85131, z: 0.60552275}
-  m_Center: {x: -0.0000002682209, y: -0.000000014901161, z: 0.00000010430813}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7500455809442388728, guid: 8819d054b4b944bf8a8ab6adca33013c, type: 3}
